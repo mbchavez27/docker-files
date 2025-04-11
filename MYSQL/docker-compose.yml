@@ -1,9 +1,16 @@
-version: '3.1'
-
 services:
-
   db:
-    image: mysql
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: strawberry
+      - MYSQL_ROOT_PASSWORD=strawberry
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldb:/var/lib/mysql
+
+
+volumes:
+  mysqldb:
