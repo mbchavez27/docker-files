@@ -1,0 +1,20 @@
+# Running `docker-compose up` will create/use the "trilium-data" directory in the user home
+# Run `TRILIUM_DATA_DIR=/path/of/your/choice docker-compose up` to set a different directory
+# To run in the background, use `docker-compose up -d`
+services:
+  trilium:
+    # Optionally, replace `latest` with a version tag like `v0.90.3`
+    # Using `latest` may cause unintended updates to the container
+    image: triliumnext/trilium:latest
+    # Restart the container unless it was stopped by the user
+    restart: unless-stopped
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    ports:
+      # Changed to 9999 so it won’t conflict with backend API
+      - '9999:8080'
+    volumes:
+      # Store Trilium data in your dedicated Git repo folder
+      - ~/mbchavezz-git-knowledge-base:/home/node/trilium-data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
