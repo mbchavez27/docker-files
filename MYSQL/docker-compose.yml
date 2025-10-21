@@ -5,7 +5,7 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=strawberry
+      - MYSQL_ROOT_PASSWORD= ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:

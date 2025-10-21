@@ -1,0 +1,23 @@
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore Docker files
+*.log
+docker-compose.override.yml
+
+# Ignore Docker volumes (do not commit database data)
+mysqldb/
+mongodbdata/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
