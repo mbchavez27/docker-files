@@ -1,16 +1,26 @@
+version: "3.9"
+
 services:
   db:
     image: mysql:latest
-    cap_add:
-      - SYS_NICE
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD= ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: mydb          # optional: create a default database
+      MYSQL_USER: admin             # new user for Adminer
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD} # password for 'admin'
     ports:
       - "3306:3306"
     volumes:
       - mysqldb:/var/lib/mysql
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8082:8080"
+    depends_on:
+      - db
 
 volumes:
   mysqldb:
